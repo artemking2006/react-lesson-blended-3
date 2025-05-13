@@ -1,15 +1,25 @@
 .link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--color-white);
-  display: inline-block;
-  letter-spacing: 0.06em;
-  border: 1px solid var(--color-light);
-  border-radius: 4px;
-  margin-bottom: 15px;
-  padding: 12px 18px;
-  transition: background-color var(--animation-cubicBezie);
+  background-color: var(--color-lightBlue);
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  transition: background-color var(--animation-cubicBezier), box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 24px;
 }
 
 .link:hover,
 .link:focus {
   background-color: var(--color-imageBackground);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
+

@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   transformCountriesData,
   transformCountryData,
-} from '../helpers/transformCountries';
+} from '../helpers/transformCountries.js';
 
 axios.defaults.baseURL = 'https://restcountries.com/v3.1';
 
@@ -13,11 +13,22 @@ export const getCountries = async () => {
   return countries;
 };
 
-export const fetchCountry = async id => {
-  const { data } = await axios.get(`/name/${id}`);
-  const country = transformCountryData(data);
+export const fetchCountry = async (id) => {
+  try {
+    const encodedId = encodeURIComponent(id); // кодуємо назву країни
+    const { data } = await axios.get(`/name/${encodedId}`);
 
-  return country[0];
+    if (!data || data.length === 0) {
+      console.warn(`No country found for id: ${id}`);
+      return null;
+    }
+
+    const country = transformCountryData(data);
+    return country[0]; // повертаємо перший елемент
+  } catch (error) {
+    console.error(`Failed to fetch country: ${id}`, error.message);
+    return null;
+  }
 };
 
 export const fetchByRegion = async region => {
